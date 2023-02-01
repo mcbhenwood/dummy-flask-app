@@ -1,14 +1,17 @@
 import os
 
 import requests
-from flask import Flask, Response
+from flask import Flask, Response, request
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello():
-    return Response("Hello! (version 2)")
+    http_host = request.headers["host"]
+    return Response(
+        "Hello! (version 3) - I am serving content for HTTP host '{}'".format(http_host)
+    )
 
 
 @app.route("/retrieve_other_service_content")
